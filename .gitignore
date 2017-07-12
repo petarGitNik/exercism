@@ -1,0 +1,7 @@
+*.*~
+*.pyc
+pip-selfcheck.json
+[Bb]in
+[Ii]nclude
+[Ll]ib
+__pycache__/
