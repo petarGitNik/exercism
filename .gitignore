@@ -5,3 +5,4 @@ pip-selfcheck.json
 [Ii]nclude
 [Ll]ib
 __pycache__/
+.cache/
