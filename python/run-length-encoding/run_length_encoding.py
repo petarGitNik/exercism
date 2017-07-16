@@ -2,9 +2,14 @@ import re
 from collections import deque
 
 def decode(phrase):
+    """
+    A horrible solution! Any suggestion if welcome. Here is how it goes: split
+    numbers from other non-numeric characters, cast numeric strings into integers,
+    and transform the list into deque (so I could use popleft() method). In each
+    iteration I pop the left element and test if it's a number. If it's not, append
+    it, else multiply it with the next popped element.
+    """
     decoded = []
-    #index = 1
-    #phrase = re.findall(r'\s|\d+|\D+', phrase)
     phrase = re.findall(r'\s|\d+|\D', phrase)
     phrase = list(map(lambda x: int(x) if x.isnumeric() else x, phrase))
     phrase = deque(phrase)
@@ -13,28 +18,23 @@ def decode(phrase):
         if len(phrase) == 0:
             decoded.append(element)
             break
-        #if is_multipliable(element, phrase[0]):
         if is_numeric(element):
             decoded.append(element *  phrase.popleft())
-            #index += 2
         else:
             decoded.append(element)
-            #index += 1
     return ''.join(decoded)
 
 def is_numeric(num):
+    """
+    If the input is an integer, then isnumeric() test will fail. Therefore, it
+    is integer. It's very unfortunate function. This because isnumeric() only
+    works for string objects.
+    """
     try:
         num.isnumeric()
     except:
         return True
     return False
-
-def is_multipliable(p, q):
-    try:
-        m = p * q
-    except:
-        return False
-    return True
 
 def encode(phrase):
     coded = []
