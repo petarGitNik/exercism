@@ -12,7 +12,6 @@ class Allergies(object):
     }
 
     def __init__(self, score):
-        self.score = score
         self.lst = [allergy for allergy, grade in self.ALLERGIES.items() if score & grade]
 
     def is_allergic_to(self, allergy):
